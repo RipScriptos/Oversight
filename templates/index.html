@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oversight AI - 3-Step Artificial Intelligence</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .main-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            padding: 40px;
+            margin-bottom: 30px;
+        }
+        
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .step {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            border-left: 5px solid #667eea;
+        }
+        
+        .step h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .input-section {
+            margin-bottom: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #555;
+        }
+        
+        input[type="text"], select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        input[type="text"]:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .results {
+            display: none;
+            margin-top: 30px;
+        }
+        
+        .result-section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .result-section h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 5px;
+        }
+        
+        .report-content {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            max-height: 400px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #f5c6cb;
+            margin: 20px 0;
+        }
+        
+        .success {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #c3e6cb;
+            margin: 20px 0;
+        }
+        
+        .download-btn {
+            background: #28a745;
+            margin-left: 10px;
+        }
+        
+        .download-btn:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Oversight AI</h1>
+            <p>3-Step Artificial Intelligence for Comprehensive Topic Analysis</p>
+        </div>
+        
+        <div class="main-card">
+            <div class="process-steps">
+                <div class="step">
+                    <h3>Step 1: Topic Input</h3>
+                    <p>Provide a topic for comprehensive research and analysis. The system validates and prepares your topic for processing.</p>
+                </div>
+                <div class="step">
+                    <h3>Step 2: Information Processing</h3>
+                    <p><strong>2a. Compile Information:</strong> In-depth research gathering relevant information<br>
+                    <strong>2b. Categorize Text:</strong> Information architect categorizes by importance</p>
+                </div>
+                <div class="step">
+                    <h3>Step 3: Output Generation</h3>
+                    <p>Generate a comprehensive informative report with categorized insights and actionable recommendations.</p>
+                </div>
+            </div>
+            
+            <div class="input-section">
+                <form id="analysisForm">
+                    <div class="form-group">
+                        <label for="topic">Research Topic:</label>
+                        <input type="text" id="topic" name="topic" placeholder="Enter your research topic (e.g., Artificial Intelligence, Climate Change, Digital Marketing)" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reportType">Report Type:</label>
+                        <select id="reportType" name="reportType">
+                            <option value="detailed">Detailed Report</option>
+                            <option value="executive">Executive Summary</option>
+                            <option value="technical">Technical Report</option>
+                            <option value="summary">Quick Summary</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn" id="analyzeBtn">
+                        Start Analysis
+                    </button>
+                </form>
+            </div>
+            
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Processing your topic through the 3-step AI system...</p>
+                <p id="currentStep">Step 1: Validating topic input</p>
+            </div>
+            
+            <div class="results" id="results">
+                <div class="result-section">
+                    <h3>Processing Statistics</h3>
+                    <div class="stats" id="stats">
+                        <!-- Stats will be populated here -->
+                    </div>
+                </div>
+                
+                <div class="result-section">
+                    <h3>Research Summary</h3>
+                    <div class="report-content" id="researchSummary">
+                        <!-- Research summary will be populated here -->
+                    </div>
+                </div>
+                
+                <div class="result-section">
+                    <h3>Categorization Summary</h3>
+                    <div class="report-content" id="categorizationSummary">
+                        <!-- Categorization summary will be populated here -->
+                    </div>
+                </div>
+                
+                <div class="result-section">
+                    <h3>Final Report</h3>
+                    <div class="report-content" id="finalReport">
+                        <!-- Final report will be populated here -->
+                    </div>
+                    <button class="btn download-btn" id="downloadBtn">Download Report</button>
+                </div>
+            </div>
+            
+            <div id="errorMessage"></div>
+        </div>
+    </div>
+
+    <script>
+        let currentSessionId = null;
+        
+        document.getElementById('analysisForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const topic = document.getElementById('topic').value.trim();
+            const reportType = document.getElementById('reportType').value;
+            
+            if (!topic) {
+                showError('Please enter a research topic.');
+                return;
+            }
+            
+            await startAnalysis(topic, reportType);
+        });
+        
+        async function startAnalysis(topic, reportType) {
+            const analyzeBtn = document.getElementById('analyzeBtn');
+            const loading = document.getElementById('loading');
+            const results = document.getElementById('results');
+            const errorMessage = document.getElementById('errorMessage');
+            
+            // Reset UI
+            analyzeBtn.disabled = true;
+            loading.style.display = 'block';
+            results.style.display = 'none';
+            errorMessage.innerHTML = '';
+            
+            try {
+                updateStep('Step 1: Validating topic input');
+                
+                const response = await fetch('/api/analyze', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        topic: topic,
+                        report_type: reportType
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    currentSessionId = data.session_id;
+                    displayResults(data);
+                    showSuccess('Analysis completed successfully!');
+                } else {
+                    showError('Analysis failed: ' + data.error);
+                }
+                
+            } catch (error) {
+                showError('Network error: ' + error.message);
+            } finally {
+                analyzeBtn.disabled = false;
+                loading.style.display = 'none';
+            }
+        }
+        
+        function updateStep(stepText) {
+            document.getElementById('currentStep').textContent = stepText;
+        }
+        
+        function displayResults(data) {
+            const results = document.getElementById('results');
+            
+            // Display statistics
+            const stats = document.getElementById('stats');
+            stats.innerHTML = `
+                <div class="stat-item">
+                    <div class="stat-value">${data.processing_time.toFixed(2)}s</div>
+                    <div class="stat-label">Processing Time</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">${data.report_type}</div>
+                    <div class="stat-label">Report Type</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">${data.session_id}</div>
+                    <div class="stat-label">Session ID</div>
+                </div>
+            `;
+            
+            // Display research summary
+            document.getElementById('researchSummary').textContent = data.research_summary;
+            
+            // Display categorization summary
+            document.getElementById('categorizationSummary').textContent = data.categorization_summary;
+            
+            // Display final report
+            document.getElementById('finalReport').textContent = data.text_report;
+            
+            results.style.display = 'block';
+        }
+        
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.innerHTML = `<div class="error">${message}</div>`;
+        }
+        
+        function showSuccess(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.innerHTML = `<div class="success">${message}</div>`;
+        }
+        
+        // Download functionality
+        document.getElementById('downloadBtn').addEventListener('click', function() {
+            if (currentSessionId) {
+                window.open(`/api/download/${currentSessionId}`, '_blank');
+            }
+        });
+        
+        // Simulate step updates during processing
+        function simulateStepUpdates() {
+            const steps = [
+                'Step 1: Validating topic input',
+                'Step 2a: Compiling information from multiple sources',
+                'Step 2b: Categorizing information by importance',
+                'Step 3: Generating comprehensive report'
+            ];
+            
+            let currentStepIndex = 0;
+            const stepInterval = setInterval(() => {
+                if (currentStepIndex < steps.length) {
+                    updateStep(steps[currentStepIndex]);
+                    currentStepIndex++;
+                } else {
+                    clearInterval(stepInterval);
+                }
+            }, 1500);
+            
+            return stepInterval;
+        }
+        
+        // Override the startAnalysis function to include step simulation
+        const originalStartAnalysis = startAnalysis;
+        startAnalysis = async function(topic, reportType) {
+            const stepInterval = simulateStepUpdates();
+            
+            try {
+                await originalStartAnalysis(topic, reportType);
+            } finally {
+                clearInterval(stepInterval);
+            }
+        };
+    </script>
+</body>
+</html>
