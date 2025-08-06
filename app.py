@@ -14,7 +14,27 @@ from src.oversight_ai import OversightAI
 
 app = Flask(__name__)
 app.config.from_object(Config)
-CORS(app)
+
+# Configure CORS for embedding
+CORS(app, 
+     origins="*",  # Allow all origins for embedding
+     allow_headers=["Content-Type", "Authorization"],
+     methods=["GET", "POST", "OPTIONS"])
+
+# Add security headers for iframe embedding
+@app.after_request
+def after_request(response):
+    # Allow iframe embedding from any origin
+    response.headers['X-Frame-Options'] = 'ALLOWALL'
+    # Alternative: Use Content-Security-Policy for more control
+    # response.headers['Content-Security-Policy'] = "frame-ancestors *;"
+    
+    # Enable cross-origin resource sharing
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
+    response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
+    
+    return response
 
 # Initialize the Oversight AI system
 oversight_ai = OversightAI()
@@ -23,6 +43,21 @@ oversight_ai = OversightAI()
 def index():
     """Main page with the web interface."""
     return render_template('index.html')
+
+@app.route('/embed')
+def embed():
+    """Embeddable version of the web interface."""
+    return render_template('embed.html')
+
+@app.route('/embed/minimal')
+def embed_minimal():
+    """Minimal embeddable version for small iframes."""
+    return render_template('embed_minimal.html')
+
+@app.route('/embed/guide')
+def embed_guide():
+    """Embedding guide and documentation."""
+    return send_file('embedding_guide.html')
 
 @app.route('/api/analyze', methods=['POST'])
 def analyze_topic():

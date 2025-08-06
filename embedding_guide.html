@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oversight AI - Embedding Guide</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f8f9fa;
+        }
+        
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        h1, h2, h3 {
+            color: #667eea;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+        }
+        
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+        
+        .example-section {
+            margin: 30px 0;
+            padding: 20px;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            background: #f8f9ff;
+        }
+        
+        .iframe-demo {
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        th {
+            background: #667eea;
+            color: white;
+        }
+        
+        .note {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        
+        .warning {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Oversight AI - Embedding Guide</h1>
+        
+        <h2>Overview</h2>
+        <p>Oversight AI can be easily embedded into any website using iframes. We provide multiple embedding options to suit different use cases and space constraints.</p>
+        
+        <h2>Available Embedding Options</h2>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Version</th>
+                    <th>URL</th>
+                    <th>Recommended Size</th>
+                    <th>Best For</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Full Interface</td>
+                    <td>/</td>
+                    <td>800x600px or larger</td>
+                    <td>Dedicated pages, large sidebars</td>
+                </tr>
+                <tr>
+                    <td>Embeddable</td>
+                    <td>/embed</td>
+                    <td>600x500px or larger</td>
+                    <td>Blog posts, content pages</td>
+                </tr>
+                <tr>
+                    <td>Minimal</td>
+                    <td>/embed/minimal</td>
+                    <td>400x400px or larger</td>
+                    <td>Small widgets, mobile views</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <h2>Basic Embedding</h2>
+        
+        <h3>Standard Embed (Recommended)</h3>
+        <div class="code-block">
+&lt;iframe 
+    src="http://localhost:12000/embed" 
+    width="600" 
+    height="500" 
+    frameborder="0"
+    style="border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);"&gt;
+&lt;/iframe&gt;
+        </div>
+        
+        <h3>Minimal Embed (For Small Spaces)</h3>
+        <div class="code-block">
+&lt;iframe 
+    src="http://localhost:12000/embed/minimal" 
+    width="400" 
+    height="400" 
+    frameborder="0"
+    style="border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);"&gt;
+&lt;/iframe&gt;
+        </div>
+        
+        <h2>Responsive Embedding</h2>
+        
+        <h3>CSS for Responsive Iframe</h3>
+        <div class="code-block">
+&lt;style&gt;
+.oversight-ai-container {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    height: 0;
+    padding-bottom: 75%; /* 4:3 Aspect Ratio */
+    margin: 20px auto;
+}
+
+.oversight-ai-iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+&lt;/style&gt;
+
+&lt;div class="oversight-ai-container"&gt;
+    &lt;iframe 
+        class="oversight-ai-iframe"
+        src="http://localhost:12000/embed"&gt;
+    &lt;/iframe&gt;
+&lt;/div&gt;
+        </div>
+        
+        <h2>Advanced Configuration</h2>
+        
+        <h3>Custom Styling</h3>
+        <p>You can customize the appearance of the embedded widget by wrapping it in a container with custom CSS:</p>
+        
+        <div class="code-block">
+&lt;div style="
+    border: 2px solid #667eea;
+    border-radius: 12px;
+    padding: 10px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+"&gt;
+    &lt;iframe 
+        src="http://localhost:12000/embed" 
+        width="600" 
+        height="500" 
+        frameborder="0"
+        style="border-radius: 8px; width: 100%;"&gt;
+    &lt;/iframe&gt;
+&lt;/div&gt;
+        </div>
+        
+        <h3>JavaScript Integration</h3>
+        <p>For advanced integration, you can communicate with the embedded iframe using postMessage:</p>
+        
+        <div class="code-block">
+&lt;script&gt;
+// Listen for messages from the embedded Oversight AI
+window.addEventListener('message', function(event) {
+    if (event.origin !== 'http://localhost:12000') return;
+    
+    // Handle messages from the embedded app
+    if (event.data.type === 'analysis_complete') {
+        console.log('Analysis completed:', event.data.sessionId);
+        // Your custom handling here
+    }
+});
+
+// Send messages to the embedded app
+function sendTopicToOversightAI(topic) {
+    const iframe = document.getElementById('oversight-ai-iframe');
+    iframe.contentWindow.postMessage({
+        type: 'set_topic',
+        topic: topic
+    }, 'http://localhost:12000');
+}
+&lt;/script&gt;
+        </div>
+        
+        <h2>Security Considerations</h2>
+        
+        <div class="warning">
+            <strong>Important:</strong> When embedding in production, make sure to:
+            <ul>
+                <li>Use HTTPS for both your site and the Oversight AI server</li>
+                <li>Configure proper CORS settings</li>
+                <li>Consider implementing Content Security Policy (CSP) headers</li>
+                <li>Validate that the iframe source is from a trusted domain</li>
+            </ul>
+        </div>
+        
+        <h2>Live Examples</h2>
+        
+        <div class="example-section">
+            <h3>Standard Embed Example</h3>
+            <p>This is how the standard embeddable version looks:</p>
+            <div class="iframe-demo">
+                <iframe 
+                    src="http://localhost:12000/embed" 
+                    width="100%" 
+                    height="500" 
+                    frameborder="0"
+                    style="border-radius: 8px;">
+                </iframe>
+            </div>
+        </div>
+        
+        <div class="example-section">
+            <h3>Minimal Embed Example</h3>
+            <p>This is how the minimal version looks in a smaller space:</p>
+            <div class="iframe-demo" style="max-width: 400px; margin: 20px auto;">
+                <iframe 
+                    src="http://localhost:12000/embed/minimal" 
+                    width="100%" 
+                    height="400" 
+                    frameborder="0"
+                    style="border-radius: 8px;">
+                </iframe>
+            </div>
+        </div>
+        
+        <h2>API Integration</h2>
+        
+        <p>For more advanced integrations, you can also use the REST API directly:</p>
+        
+        <div class="code-block">
+// Example API usage
+fetch('http://localhost:12000/api/analyze', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+        topic: 'Artificial Intelligence',
+        report_type: 'detailed'
+    })
+})
+.then(response => response.json())
+.then(data => {
+    if (data.success) {
+        console.log('Analysis completed:', data);
+        // Handle the results
+    }
+});
+        </div>
+        
+        <h2>Available API Endpoints</h2>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Endpoint</th>
+                    <th>Method</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>/api/analyze</td>
+                    <td>POST</td>
+                    <td>Start a new analysis</td>
+                </tr>
+                <tr>
+                    <td>/api/status/{session_id}</td>
+                    <td>GET</td>
+                    <td>Get processing status</td>
+                </tr>
+                <tr>
+                    <td>/api/results/{session_id}</td>
+                    <td>GET</td>
+                    <td>Get analysis results</td>
+                </tr>
+                <tr>
+                    <td>/api/download/{session_id}</td>
+                    <td>GET</td>
+                    <td>Download report as text file</td>
+                </tr>
+                <tr>
+                    <td>/api/report-types</td>
+                    <td>GET</td>
+                    <td>Get available report types</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="note">
+            <strong>Note:</strong> Replace <code>http://localhost:12000</code> with your actual Oversight AI server URL when deploying to production.
+        </div>
+        
+        <h2>Troubleshooting</h2>
+        
+        <h3>Common Issues</h3>
+        <ul>
+            <li><strong>Iframe not loading:</strong> Check CORS settings and ensure the server is running</li>
+            <li><strong>Styling issues:</strong> Verify iframe dimensions and CSS conflicts</li>
+            <li><strong>API errors:</strong> Check network connectivity and API endpoint URLs</li>
+            <li><strong>Cross-origin issues:</strong> Ensure proper CORS configuration on the server</li>
+        </ul>
+        
+        <h3>Support</h3>
+        <p>For additional support or custom integration requirements, please refer to the project documentation or contact the development team.</p>
+    </div>
+</body>
+</html>
