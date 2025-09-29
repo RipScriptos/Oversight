@@ -1,0 +1,29 @@
+# Oversight AI - 3-Step Artificial Intelligence System
+# Dependencies for the Flask  web application and AI processing system
+
+# Web Framework
+Flask==2.3.3
+Flask-CORS==4.0.0
+
+# Environment Configuration
+python-dotenv==1.0.0
+
+# HTTP Request and Web Scrapping
+requests==2.31.0
+beautifulsoup4==4.12.2
+
+# Standard Library Dependencies (included in Python)
+# - json (built-in)
+# - io (built-in)
+# - os (built-in)
+# - time (built-in)
+# - datetime (built-in)
+# - typing (built-in)
+# - re (built-in)
+# - sys (built-in)
+# - threading (built-in)
+
+# Optional: For enhanced HTML parsing
+lxml==4.9.3
+# Optional: For better HTTP session handling
+urllib==2.0.4
