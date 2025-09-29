@@ -79,16 +79,32 @@ git clone https://github.com/RipScriptos/Oversight.git
 cd Oversight
 ```
 
-2. Install dependencies:
+2. (Recommended) Create and activate a virtual environment:
+```bash
+python -m venv oversight_env
+source oversight_env/bin/activate  # On Windows: oversight_env\Scripts\activate
+```
+
+3. Install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
-3. (Optional) Configure environment variables:
+4. (Optional) Configure environment variables:
 ```bash
 cp .env.example .env
 # Edit .env with your configuration
 ```
+
+### Dependencies
+The project requires the following Python packages:
+- **Flask** (2.3.3) - Web framework for the API and web interface
+- **Flask-CORS** (4.0.0) - Cross-Origin Resource Sharing support for embedding
+- **python-dotenv** (1.0.0) - Environment variable management
+- **requests** (2.31.0) - HTTP library for web scraping and API calls
+- **beautifulsoup4** (4.12.2) - HTML/XML parsing for web content extraction
+- **lxml** (4.9.3) - XML and HTML parser (optional, for better performance)
+- **urllib3** (2.0.4) - HTTP client library (optional, for enhanced session handling)
 
 ## Usage
 
