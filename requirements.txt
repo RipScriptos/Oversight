@@ -26,4 +26,4 @@ beautifulsoup4==4.12.2
 # Optional: For enhanced HTML parsing
 lxml==4.9.3
 # Optional: For better HTTP session handling
-urllib==2.0.4
+urllib3==2.0.4
