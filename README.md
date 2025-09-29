@@ -69,31 +69,85 @@ Oversight AI is a sophisticated 3-step artificial intelligence system designed t
 ## Installation
 
 ### Prerequisites
+
+**All Platforms:**
 - Python 3.8 or higher
 - pip package manager
 
+**macOS:**
+- Xcode Command Line Tools (for some dependencies): `xcode-select --install`
+- Homebrew (recommended): [Install Homebrew](https://brew.sh/)
+
+**Windows:**
+- Microsoft Visual C++ 14.0 or greater (usually included with Visual Studio)
+- Windows 10/11 or Windows Server 2016+
+
+**Linux (Ubuntu/Debian):**
+- `python3-dev` and `python3-venv` packages:
+  ```bash
+  sudo apt-get update
+  sudo apt-get install python3-dev python3-venv python3-pip
+  ```
+
+**Linux (CentOS/RHEL/Fedora):**
+- Development tools:
+  ```bash
+  sudo yum groupinstall "Development Tools"  # CentOS/RHEL
+  sudo dnf groupinstall "Development Tools"  # Fedora
+  ```
+
 ### Setup
-1. Clone the repository:
+
+#### 1. Clone the repository:
 ```bash
 git clone https://github.com/RipScriptos/Oversight.git
 cd Oversight
 ```
 
-2. (Recommended) Create and activate a virtual environment:
+#### 2. Create and activate a virtual environment (Recommended):
+
+**macOS/Linux:**
 ```bash
-python -m venv oversight_env
-source oversight_env/bin/activate  # On Windows: oversight_env\Scripts\activate
+python3 -m venv oversight_env
+source oversight_env/bin/activate
 ```
 
-3. Install dependencies:
+**Windows (Command Prompt):**
+```cmd
+python -m venv oversight_env
+oversight_env\Scripts\activate
+```
+
+**Windows (PowerShell):**
+```powershell
+python -m venv oversight_env
+oversight_env\Scripts\Activate.ps1
+```
+
+#### 3. Install dependencies:
+
+**All platforms:**
 ```bash
 pip install -r requirements.txt
 ```
 
-4. (Optional) Configure environment variables:
+**Alternative for macOS (if you encounter issues):**
+```bash
+pip3 install -r requirements.txt
+```
+
+#### 4. Configure environment variables (Optional):
+
+**macOS/Linux:**
 ```bash
 cp .env.example .env
-# Edit .env with your configuration
+nano .env  # or use your preferred editor
+```
+
+**Windows:**
+```cmd
+copy .env.example .env
+notepad .env
 ```
 
 ### Dependencies
@@ -110,15 +164,30 @@ The project requires the following Python packages:
 
 ### Command Line Demo
 Run the interactive demo to test the system:
+
+**macOS/Linux:**
 ```bash
+python3 run_demo.py
+```
+
+**Windows:**
+```cmd
 python run_demo.py
 ```
 
 ### Web Interface
 Start the web application:
+
+**macOS/Linux:**
 ```bash
+python3 app.py
+```
+
+**Windows:**
+```cmd
 python app.py
 ```
+
 Access the web interface at: `http://localhost:12001`
 
 ### Programmatic Usage
@@ -266,6 +335,57 @@ For questions, issues, or feature requests, please:
 2. Search for existing issues
 3. Create a new issue with detailed information
 4. Provide system information and error logs
+
+## Troubleshooting
+
+### Common Issues
+
+#### Python Command Not Found
+**macOS/Linux:**
+- Try using `python3` instead of `python`
+- Install Python 3.8+ from [python.org](https://python.org) or use Homebrew: `brew install python3`
+
+**Windows:**
+- Install Python from [python.org](https://python.org) and make sure to check "Add Python to PATH"
+- Try using `py` instead of `python`
+
+#### Virtual Environment Issues
+**macOS/Linux:**
+```bash
+# If python3-venv is not installed (Ubuntu/Debian)
+sudo apt-get install python3-venv
+
+# Alternative virtual environment creation
+python3 -m virtualenv oversight_env
+```
+
+**Windows PowerShell Execution Policy:**
+```powershell
+# If you get execution policy errors
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+
+#### Permission Errors
+**macOS/Linux:**
+```bash
+# If you get permission errors with pip
+pip install --user -r requirements.txt
+```
+
+**Windows:**
+```cmd
+# Run Command Prompt as Administrator if needed
+```
+
+#### Port Already in Use
+If port 12001 is already in use, you can change it in your `.env` file:
+```
+PORT=8080
+```
+
+### Getting Help
+- Check the [Issues](https://github.com/RipScriptos/Oversight/issues) page for known problems
+- Create a new issue if you encounter a bug or need help
 
 ## Roadmap
 
