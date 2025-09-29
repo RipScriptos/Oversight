@@ -278,7 +278,7 @@ if __name__ == '__main__':
     print("Starting Oversight AI System...")
     print(f"Available report types: {oversight_ai.get_available_report_types()}")
     print(f"Server will run on {Config.HOST}:{Config.PORT}")
-    print("Access the web interface at: http://localhost:12000")
+    print(f"Access the web interface at: http://localhost:{Config.PORT}")
     
     app.run(
         host=Config.HOST,
