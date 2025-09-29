@@ -188,6 +188,23 @@ python3 app.py
 python app.py
 ```
 
+### Pip Install
+```bash
+pip install flask
+```
+```bash
+pip install flask_cors
+```
+```bash
+pip install dotenv
+```
+```bash
+pip install beautifulsoup4
+```
+```bash
+pip install openai
+```
+
 Access the web interface at: `http://localhost:12001`
 
 ### Programmatic Usage
