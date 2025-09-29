@@ -190,19 +190,22 @@ python app.py
 
 ### Pip Install
 ```bash
-pip install flask
+pip3 install flask
 ```
 ```bash
-pip install flask_cors
+pip3 install flask_cors
 ```
 ```bash
-pip install dotenv
+pip3 install dotenv
 ```
 ```bash
-pip install beautifulsoup4
+pip3 install beautifulsoup4
 ```
 ```bash
-pip install openai
+pip3 install openai
+```
+```bash
+pip3 install requests
 ```
 
 Access the web interface at: `http://localhost:12001`
