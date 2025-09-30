@@ -98,7 +98,11 @@ Oversight AI is a sophisticated 3-step artificial intelligence system designed t
 
 ### Setup
 
-#### 1. Clone the repository:
+#### 1. Clone the repository: (Also remove Oversight that is already on PC if needing update.)
+```bash
+rm -rf Oversight
+```
+
 ```bash
 git clone https://github.com/RipScriptos/Oversight.git
 cd Oversight
