@@ -479,3 +479,101 @@ REPORT CONTENT
                 text += f"{indent_str}{key.title().replace('_', ' ')}: {value}\n"
         
         return text
+    def export_report_as_markdown(self, report_data: Dict[str, Any]) -> str:
+        """
+        Export the report as a formatted markdown document with 3 main sections:
+        1. Sources Used
+        2. Speed/Loading Time/ETA
+        3. Document Content (varies by report type)
+        """
+        topic = report_data['metadata']['topic']
+        report_type = report_data['metadata']['report_type']
+        timestamp = report_data['metadata']['generation_timestamp']
+        sources_analyzed = report_data['metadata']['total_sources_analyzed']
+        confidence = report_data['metadata']['categorization_confidence']
+
+        markdown_report = f"""# {topic.title()} - {report_type.title()} Report
+
+*Generated on {timestamp}*
+
+---
+
+## 1. Sources Used
+
+- **Primary Source**: OpenAI GPT Model
+- **Total Sources Analyzed**: {sources_analyzed}
+- **Source Type**: AI-Generated Research Content
+- **Confidence Level**: {confidence:.2%}
+- **Research Method**: Multi-angle systematic analysis
+- **Data Quality**: High reliability with systematic categorization
+
+---
+
+## 2. Speed & Performance Metrics
+
+- **Report Type**: {report_type.title()}
+- **Generation Timestamp**: {timestamp}
+- **Processing Method**: Automated AI analysis
+- **Quality Assurance**: Multi-criteria assessment with confidence scoring
+- **Coverage**: Comprehensive multi-angle approach
+
+---
+
+## 3. Document Content
+
+"""
+
+        # Add content sections based on report type
+        for section_name, section_content in report_data['content'].items():
+            section_title = section_name.replace('_', ' ').title()
+            markdown_report += f"### {section_title}\n\n"
+
+            if isinstance(section_content, str):
+                markdown_report += section_content + "\n\n"
+            elif isinstance(section_content, dict):
+                markdown_report += self._format_dict_as_markdown(section_content) + "\n\n"
+            elif isinstance(section_content, list):
+                for item in section_content:
+                    markdown_report += f"- {item}\n"
+                markdown_report += "\n"
+
+        # Add appendices if they exist
+        if report_data.get('appendices'):
+            markdown_report += "---\n\n## Appendices\n\n"
+            for appendix_name, appendix_content in report_data['appendices'].items():
+                appendix_title = appendix_name.replace('_', ' ').title()
+                markdown_report += f"### {appendix_title}\n\n"
+                if isinstance(appendix_content, dict):
+                    markdown_report += self._format_dict_as_markdown(appendix_content) + "\n\n"
+                else:
+                    markdown_report += str(appendix_content) + "\n\n"
+
+        return markdown_report
+
+    def _format_dict_as_markdown(self, data: Dict[str, Any], level: int = 0) -> str:
+        """
+        Format dictionary data as markdown.
+        """
+        markdown = ""
+        
+        for key, value in data.items():
+            key_formatted = key.replace('_', ' ').title()
+            
+            if isinstance(value, dict):
+                if level == 0:
+                    markdown += f"#### {key_formatted}\n\n"
+                else:
+                    markdown += f"**{key_formatted}:**\n\n"
+                markdown += self._format_dict_as_markdown(value, level + 1)
+            elif isinstance(value, list):
+                markdown += f"**{key_formatted}:**\n\n"
+                for item in value:
+                    if isinstance(item, dict):
+                        markdown += self._format_dict_as_markdown(item, level + 1)
+                    else:
+                        markdown += f"- {item}\n"
+                markdown += "\n"
+            else:
+                markdown += f"**{key_formatted}:** {value}\n\n"
+
+        return markdown

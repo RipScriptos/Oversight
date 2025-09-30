@@ -90,12 +90,19 @@ def run_demo():
         print("-"*60)
         print(result['text_report'])
         
-        # Save report to file
-        filename = f"oversight_report_{topic.replace(' ', '_')}_{result['session_id']}.txt"
+        # Save report to markdown file
+        filename = f"oversight_report_{topic.replace(' ', '_')}_{result['session_id']}.md"
         with open(filename, 'w', encoding='utf-8') as f:
+            f.write(result['markdown_report'])
+        
+        print(f"\n📄 Markdown report saved to: {filename}")
+        
+        # Also save text version for compatibility
+        text_filename = f"oversight_report_{topic.replace(' ', '_')}_{result['session_id']}.txt"
+        with open(text_filename, 'w', encoding='utf-8') as f:
             f.write(result['text_report'])
         
-        print(f"\n📄 Report saved to: {filename}")
+        print(f"📄 Text report saved to: {text_filename}")
         
     else:
         print(f"\n❌ Analysis failed: {result['error']}")

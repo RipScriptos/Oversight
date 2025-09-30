@@ -8,6 +8,9 @@ Flask-CORS==4.0.0
 # Environment Configuration
 python-dotenv==1.0.0
 
+# OpenAI API Integration
+openai>=1.0.0
+
 # HTTP Request and Web Scrapping
 requests==2.31.0
 beautifulsoup4==4.12.2
