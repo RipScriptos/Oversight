@@ -151,28 +151,42 @@ def get_results(session_id):
         }), 500
 
 @app.route('/api/download/<session_id>')
-def download_report(session_id):
+@app.route('/api/download/<session_id>/<format_type>')
+def download_report(session_id, format_type='markdown'):
     """
-    Download the report for a specific session as a text file.
+    Download the report for a specific session as a markdown or text file.
     """
     try:
-        report_text = oversight_ai.export_session_data(session_id, format='text')
+        # Default to markdown format
+        if format_type not in ['markdown', 'text']:
+            format_type = 'markdown'
+            
+        report_content = oversight_ai.export_session_data(session_id, format=format_type)
         
-        if report_text:
+        if report_content:
             # Create a file-like object
-            report_file = io.StringIO(report_text)
+            report_file = io.StringIO(report_content)
             report_bytes = io.BytesIO(report_file.getvalue().encode('utf-8'))
             
             # Get session data for filename
             results = oversight_ai.get_session_results(session_id)
             topic = results.get('final_report', {}).get('metadata', {}).get('topic', 'report')
-            filename = f"oversight_ai_report_{topic.replace(' ', '_')}_{session_id}.txt"
+            
+            # Set file extension and mimetype based on format
+            if format_type == 'markdown':
+                extension = 'md'
+                mimetype = 'text/markdown'
+            else:
+                extension = 'txt'
+                mimetype = 'text/plain'
+                
+            filename = f"oversight_ai_report_{topic.replace(' ', '_')}_{session_id}.{extension}"
             
             return send_file(
                 report_bytes,
                 as_attachment=True,
                 download_name=filename,
-                mimetype='text/plain'
+                mimetype=mimetype
             )
         else:
             return jsonify({

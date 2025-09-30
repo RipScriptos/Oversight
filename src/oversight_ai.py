@@ -100,7 +100,8 @@ class OversightAI:
                 'research_summary': self.research_engine.get_research_summary(research_data),
                 'categorization_summary': self.information_architect.get_categorization_summary(categorized_data),
                 'final_report': final_report,
-                'text_report': self.report_generator.export_report_as_text(final_report)
+                'text_report': self.report_generator.export_report_as_text(final_report),
+                'markdown_report': self.report_generator.export_report_as_markdown(final_report)
             }
             
         except Exception as e:
@@ -195,6 +196,10 @@ class OversightAI:
             return json.dumps(session_data, indent=2, default=str)
         elif format.lower() == 'text' and 'final_report' in session_data.get('results', {}):
             return self.report_generator.export_report_as_text(
+                session_data['results']['final_report']
+            )
+        elif format.lower() == 'markdown' and 'final_report' in session_data.get('results', {}):
+            return self.report_generator.export_report_as_markdown(
                 session_data['results']['final_report']
             )
         else:
