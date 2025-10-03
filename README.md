@@ -508,6 +508,8 @@ PORT=8080
 
 ## Roadmap
 
+[![](https://img.shields.io/badge/Code_Pen_|_Embed--Unfinished_-242424?logo=codepen&logoColor=white&style=for-the-badge)](https://codepen.io/Anant-Scriptos-Parikh/pen/RNrRQPX)
+
 ### Planned Features
 - **Multi-Model Support**: Integration with Claude, Gemini, and other AI models
 - **Advanced Caching**: Intelligent caching for improved performance and cost efficiency
